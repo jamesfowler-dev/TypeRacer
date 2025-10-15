@@ -24,81 +24,61 @@
     </header>
 
     <main>
-        <!-- Responsive flex-box section -->
-        <section>
-
-            <div class="container">
+        <div class="container my-5">
+            <div class="row">
                 <div class="col-md-8">
-                    <!-- Bootstrap options card -->
+                    <!-- Difficulty options -->
                     <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">Select Difficulty</label>
-                        <select class="form-select" id="inputGroupSelect01">
-                            <option selected>Easy</option>
-                            <option value="1">Medium</option>
-                            <option value="2">Hard</option>
+                        <label class="input-group-text" for="difficulty">Select Difficulty</label>
+                        <select class="form-select" id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
                         </select>
                     </div>
 
-                    <!-- Small text box-->
-                    <div class="row mb-5">
-                        <div class="col-md-8 mb-3">
-                            <label for="smallTextbox" class="form-label visually-hidden">Short input</label>
-                            <textarea id="smallTextbox" class="form-control" rows="6"
-                                placeholder="Short text box"></textarea>
+                    <!-- Text area -->
+                    <div class="test-area">
+                        <p class="lead">Test your typing speed by typing the text shown below:</p>
+                        <div class="mb-3 p-3 border" id="sample-text">
+                            The cat sat on the mat.
                         </div>
                     </div>
-
-                    <!-- Larger text box -->
-                    <div class="row mb-5">
-                        <div class="col-md-8">
-                            <label for="largeTextbox" class="form-label visually-hidden">Long input</label>
-                            <textarea id="largeTextbox" class="form-control" rows="12"
-                                placeholder="Click the start button to begin the test"></textarea>
-                        </div>
+                    <!-- Larger text area  -->
+                    <div class="mb-3">
+                        <label class="form-label visually-hidden" for="user-input">Type Here</label>
+                        <textarea class="form-control" id="user-input" rows="6"
+                            placeholder="Click the start button to begin the test"></textarea>
                     </div>
 
-                    <!-- Control buttons -->
-                    <div class="row mb-5">
-                        <button id="start-btn" class="btn btn-success">Start</button>
-                        <button id="stop-btn" class="btn btn-danger">Stop</button>
-                        <button id="retry-btn" class="btn btn-secondary">Retry</button>
+                    <!-- Buttons -->
+                    <div class="my-3 text-center">
+                        <button class="btn btn-lg btn-outline-orange" id="start-btn">Start</button>
+                        <button class="btn btn-lg btn-outline-orange" id="stop-btn">Stop</button>
+                        <button class="btn btn-lg btn-outline-orange" id="retry-btn">Retry</button>
                     </div>
                 </div>
 
+                <!-- Results section -->
                 <div class="col-md-4">
-                    <!-- Results card -->
-                    <div id="results" class="card mb-5">
-                        <div class="card-body justify-content-center text-center">
-                            <h5 class="card-title">Results</h5>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="mb-0">Level</p>
-                                    <strong id="level">Easy</strong>
-                                </div>
-                                <div class="col">
-                                    <p class="mb-0">Time</p>
-                                    <strong id="time">0s</strong>
-                                </div>
-                                <div class="col">
-                                    <p class="mb-0">WPM</p>
-                                    <strong id="wpm">0</strong>
-                                </div>
-                            </div>
+                    <div id="results-area" class="text-center">
+                        <h2>Results</h2>
+                        <div>
+                            <p>Level: <span id="level">Easy</span></p>
+
+                        </div>
+                        <div>
+                            <p>Time: <span id="time">0</span>s</p>
+                        </div>
+                        <div>
+                            <p>WPM: <span id="wpm">0</span></p>
                         </div>
                     </div>
                 </div>
-
             </div>
-
-        </section>
-
-        <!-- Test area -->
-        <section></section>
-
-        <!-- Results area -->
-        <section></section>
-
+        </div>
     </main>
+
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

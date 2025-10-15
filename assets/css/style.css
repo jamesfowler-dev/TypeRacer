@@ -12,8 +12,17 @@ h1 {
     font-family: var(--secondary-font);
 }
 
-.orange-header {
+header {
     background: #ff8400; /* Orange background color */
+    padding-top: 2.5rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
 }
 
 /* Instructions button styling */
@@ -27,11 +36,6 @@ h1 {
 
 .btn-instructions:hover {
     background: grey;
-}
-
-/* Space between header and the first section */
-header.orange-header + section {
-    padding-top: 2.5rem;
 }
 
 /* Control buttons: white background with orange border */
@@ -53,4 +57,15 @@ header.orange-header + section {
     background: #fff1e6; /* very light orange tint on hover */
     color: black;
     border-color: #ff6a00;
+}
+
+#results-area {
+    background: #fff;
+    border: 3px solid #ff8400;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
