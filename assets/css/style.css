@@ -62,9 +62,46 @@ header.orange-header + section {
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
+    flex-wrap: wrap; /* allow buttons to wrap to next line rather than overflow */
+}
+
+/* Allow buttons to shrink when container is narrow */
+#start-btn,
+#stop-btn,
+#retry-btn {
+    min-width: 0; /* allow flex items to shrink below previous min */
 }
 
 /* Media queries for responsiveness */
+@media (max-width: 320px) {
+    /* constrain and center the main containers so content doesn't stick to edges */
+    header .container,
+    section > .container {
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    /* ensure control buttons container uses the same constraint */
+    .control-buttons {
+        max-width: 320px;
+    }
+}
+
+/* Stack buttons vertically on narrow screens to avoid overflow */
+@media (max-width: 480px) {
+    .control-buttons {
+        gap: 0.5rem;
+    }
+
+    .control-buttons > button {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+}
+
 @media (min-width: 768px) {
     header.orange-header + section {
         padding-top: 4rem;
