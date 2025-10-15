@@ -1,0 +1,24 @@
+/* Google fonts import */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Macondo&display=swap");
+
+/* Orange header styles */
+.orange-header {
+    background: linear-gradient(
+        180deg,
+        #ff8a00 0%,
+        #ff6a00 100%
+    ); /* warm orange gradient */
+    color: white;
+}
+
+.orange-header h1,
+.orange-header p {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 1200px) {
+    .orange-header .display-4 {
+        font-size: 3.5rem;
+    }
+}
