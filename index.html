@@ -23,11 +23,13 @@
         </div>
     </header>
 
-    <!-- Responsive grid section -->
-    <section>
-        <div class="container">
-            <div class="grid-columns">
-                <div class="left-col">
+    <main>
+        <!-- Responsive flex-box section -->
+        <section>
+
+            <div class="container">
+                <div class="col-md-8">
+                    <!-- Bootstrap options card -->
                     <div class="input-group mb-3">
                         <label class="input-group-text" for="inputGroupSelect01">Select Difficulty</label>
                         <select class="form-select" id="inputGroupSelect01">
@@ -37,14 +39,18 @@
                         </select>
                     </div>
 
-                    <!-- Two text boxes: second is double the size of the first -->
+                    <!-- Small text box-->
                     <div class="row mb-5">
-                        <div class="col-12 mb-3">
+                        <div class="col-md-8 mb-3">
                             <label for="smallTextbox" class="form-label visually-hidden">Short input</label>
                             <textarea id="smallTextbox" class="form-control" rows="6"
                                 placeholder="Short text box"></textarea>
                         </div>
-                        <div class="col-12">
+                    </div>
+
+                    <!-- Larger text box -->
+                    <div class="row mb-5">
+                        <div class="col-md-8">
                             <label for="largeTextbox" class="form-label visually-hidden">Long input</label>
                             <textarea id="largeTextbox" class="form-control" rows="12"
                                 placeholder="Click the start button to begin the test"></textarea>
@@ -52,46 +58,47 @@
                     </div>
 
                     <!-- Control buttons -->
-                    <div class="d-flex gap-2 justify-content-between mb-5 control-buttons">
+                    <div class="row mb-5">
                         <button id="start-btn" class="btn btn-success">Start</button>
                         <button id="stop-btn" class="btn btn-danger">Stop</button>
                         <button id="retry-btn" class="btn btn-secondary">Retry</button>
                     </div>
                 </div>
 
-                <aside class="right-col">
+                <div class="col-md-4">
                     <!-- Results card -->
                     <div id="results" class="card mb-5">
-                        <div class="card-body">
+                        <div class="card-body justify-content-center text-center">
                             <h5 class="card-title">Results</h5>
-                            <div class="row text-center">
-                                <div class="col-12 col-md-4">
+                            <div class="row">
+                                <div class="col">
                                     <p class="mb-0">Level</p>
                                     <strong id="level">Easy</strong>
                                 </div>
-                                <div class="col-12 col-md-4">
+                                <div class="col">
                                     <p class="mb-0">Time</p>
                                     <strong id="time">0s</strong>
                                 </div>
-                                <div class="col-12 col-md-4">
+                                <div class="col">
                                     <p class="mb-0">WPM</p>
                                     <strong id="wpm">0</strong>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </aside>
+                </div>
+
             </div>
-        </div>
-    </section>
 
-    <!-- Test area -->
-    <section></section>
+        </section>
 
-    <!-- Results area -->
-    <section></section>
+        <!-- Test area -->
+        <section></section>
 
+        <!-- Results area -->
+        <section></section>
 
+    </main>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
