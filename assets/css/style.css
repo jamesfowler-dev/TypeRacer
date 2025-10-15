@@ -1,20 +1,74 @@
-/* Google fonts import */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Macondo&display=swap");
+/* Google fonts import: Alegreya (serif) and Nunito (sans) */
+@import url("https://fonts.googleapis.com/css2?family=Alegreya:wght@300;400;700;900&family=Nunito:wght@300;400;600;700;800&display=swap");
 
-/* Orange header styles */
-.orange-header {
-    background: linear-gradient(
-        180deg,
-        #ff8a00 0%,
-        #ff6a00 100%
-    ); /* warm orange gradient */
-    color: white;
+/* Root font variables */
+:root {
+    --primary-font: "Nunito", "Helvetica Neue", Arial, sans-serif;
+    --secondary-font: "Alegreya", Georgia, "Times New Roman", serif;
 }
 
-.orange-header h1,
-.orange-header p {
-    color: #fff;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+/* Use Alegreya for main headings */
+h1 {
+    font-family: var(--secondary-font);
+}
+
+.orange-header {
+    background: #ff8400; /* Orange background color */
+}
+
+/* Instructions button styling */
+.btn-instructions {
+    background: rgba(255, 255, 255, 0.9);
+    color: black; /* black for text */
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+
+.btn-instructions:hover {
+    background: grey;
+}
+
+/* Space between header and the first section */
+header.orange-header + section {
+    padding-top: 2.5rem;
+}
+
+/* Control buttons: white background with orange border */
+#start-btn,
+#stop-btn,
+#retry-btn {
+    background: #fff;
+    color: #000; /* black text */
+    border: 3px solid #ff8400;
+    padding: 1rem 1.5rem; /* increase size */
+    font-weight: 700;
+    font-size: 1.25rem; /* larger text */
+    border-radius: 8px;
+    flex: 1 1 0; /* allow buttons to grow evenly */
+    min-width: 140px; /* ensure a comfortable minimum */
+}
+
+#start-btn:hover,
+#stop-btn:hover,
+#retry-btn:hover {
+    background: #fff1e6; /* very light orange tint on hover */
+    color: black;
+    border-color: #ff6a00;
+}
+
+/* Container for control buttons (centers and constrains width) */
+.control-buttons {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+    header.orange-header + section {
+        padding-top: 4rem;
+    }
 }
 
 @media (min-width: 1200px) {
