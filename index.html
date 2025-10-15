@@ -26,51 +26,61 @@
     <!-- Responsive grid section -->
     <section>
         <div class="container">
-            <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Select Difficulty</label>
-                <select class="form-select" id="inputGroupSelect01">
-                    <option selected>Easy</option>
-                    <option value="1">Medium</option>
-                    <option value="2">Hard</option>
-                </select>
-            </div>
-            <!-- Two text boxes: second is double the size of the first -->
-            <div class="row mb-5">
-                <div class="col-12 col-md-4 mb-3 mb-md-0">
-                    <label for="smallTextbox" class="form-label visually-hidden">Short input</label>
-                    <textarea id="smallTextbox" class="form-control" rows="6" placeholder="Short text box"></textarea>
-                </div>
-                <div class="col-12 col-md-8">
-                    <label for="largeTextbox" class="form-label visually-hidden">Long input</label>
-                    <textarea id="largeTextbox" class="form-control" rows="12"
-                        placeholder="Click the start button to begin the test"></textarea>
-                </div>
-            </div>
-            <!-- Control buttons -->
-            <div class="d-flex gap-2 justify-content-between mb-5 control-buttons">
-                <button id="start-btn" class="btn btn-success">Start</button>
-                <button id="stop-btn" class="btn btn-danger">Stop</button>
-                <button id="retry-btn" class="btn btn-secondary">Retry</button>
-            </div>
-            <!-- Results card -->
-            <div id="results" class="card mb-5">
-                <div class="card-body">
-                    <h5 class="card-title">Results</h5>
-                    <div class="row text-center">
-                        <div class="col-12 col-md-4">
-                            <p class="mb-0">WPM</p>
-                            <strong id="wpm">0</strong>
+            <div class="grid-columns">
+                <div class="left-col">
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="inputGroupSelect01">Select Difficulty</label>
+                        <select class="form-select" id="inputGroupSelect01">
+                            <option selected>Easy</option>
+                            <option value="1">Medium</option>
+                            <option value="2">Hard</option>
+                        </select>
+                    </div>
+
+                    <!-- Two text boxes: second is double the size of the first -->
+                    <div class="row mb-5">
+                        <div class="col-12 mb-3">
+                            <label for="smallTextbox" class="form-label visually-hidden">Short input</label>
+                            <textarea id="smallTextbox" class="form-control" rows="6"
+                                placeholder="Short text box"></textarea>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <p class="mb-0">Accuracy</p>
-                            <strong id="accuracy">0%</strong>
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <p class="mb-0">Errors</p>
-                            <strong id="errors">0</strong>
+                        <div class="col-12">
+                            <label for="largeTextbox" class="form-label visually-hidden">Long input</label>
+                            <textarea id="largeTextbox" class="form-control" rows="12"
+                                placeholder="Click the start button to begin the test"></textarea>
                         </div>
                     </div>
+
+                    <!-- Control buttons -->
+                    <div class="d-flex gap-2 justify-content-between mb-5 control-buttons">
+                        <button id="start-btn" class="btn btn-success">Start</button>
+                        <button id="stop-btn" class="btn btn-danger">Stop</button>
+                        <button id="retry-btn" class="btn btn-secondary">Retry</button>
+                    </div>
                 </div>
+
+                <aside class="right-col">
+                    <!-- Results card -->
+                    <div id="results" class="card mb-5">
+                        <div class="card-body">
+                            <h5 class="card-title">Results</h5>
+                            <div class="row text-center">
+                                <div class="col-12 col-md-4">
+                                    <p class="mb-0">Level</p>
+                                    <strong id="level">Easy</strong>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <p class="mb-0">Time</p>
+                                    <strong id="time">0s</strong>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <p class="mb-0">WPM</p>
+                                    <strong id="wpm">0</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </div>
     </section>

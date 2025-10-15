@@ -108,6 +108,93 @@ header.orange-header + section {
     }
 }
 
+/* At tablet sizes, keep items stacked vertically but show results in a right column */
+@media (min-width: 768px) {
+    section > .container {
+        display: grid;
+        /* left column is fluid (keeps the stacked/mobile look), right column is a fixed width results box */
+        grid-template-columns: 1fr 320px;
+        gap: 1.25rem 2rem;
+        align-items: start;
+    }
+
+    /* Ensure the main form elements live in the left column */
+    /* assign explicit grid rows so results aligns with the difficulty selector */
+    /* stronger override to neutralize Bootstrap utility margins on this layout */
+    section > .container > .input-group,
+    section > .container > .input-group.mb-3 {
+        grid-column: 1;
+        grid-row: 1;
+        margin-bottom: 0 !important; /* override Bootstrap's mb-3 */
+    }
+
+    section > .container > .row,
+    section > .container > .row.mb-5 {
+        grid-column: 1;
+        grid-row: 2;
+        margin: 0 !important; /* remove explicit top margin and use grid row-gap for spacing */
+        margin-bottom: 0 !important;
+    }
+
+    section > .container > .control-buttons {
+        grid-column: 1;
+        grid-row: 3;
+        margin-top: 2rem !important; /* grid row-gap provides 1rem; add 2rem so total = 3rem (mobile mb-5) */
+    }
+
+    /* Move results card into the right column */
+    section > .container > #results {
+        grid-column: 2;
+        grid-row: 1; /* align to the same row as the difficulty selector */
+        justify-self: stretch;
+        width: 100%;
+        margin: 0;
+        /* keep results visible at the top of the page when scrolling */
+        position: sticky;
+        top: 1rem;
+        z-index: 40;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        align-self: start;
+    }
+
+    /* Force the textareas (the left-column row) to stack vertically even at md+ */
+    section > .container > .row > .col-12,
+    section > .container > .row > .col-md-4,
+    section > .container > .row > .col-md-8 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Grid columns layout for clarity and consistent spacing */
+@media (min-width: 768px) {
+    .grid-columns {
+        display: grid;
+        /* left is fluid, right is fixed-width results column to the right */
+        grid-template-columns: 1fr 1px;
+        gap: 1.25rem 2rem;
+        align-items: start;
+    }
+
+    .grid-columns .left-col {
+        grid-column: 1;
+    }
+
+    .grid-columns .right-col {
+        grid-column: 2;
+        position: relative;
+        box-sizing: border-box;
+        width: 320px;
+        min-width: 320px;
+    }
+
+    /* keep results sticky within the right column */
+    .grid-columns .right-col #results {
+        position: sticky;
+        top: 1rem;
+    }
+}
+
 @media (min-width: 1200px) {
     .orange-header .display-4 {
         font-size: 3.5rem;
