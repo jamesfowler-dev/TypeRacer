@@ -77,13 +77,69 @@
         return Math.round(wpm);
     }
 
+    // Keep the currently displayed plain-sample text in a variable so handlers
+    // don't have to re-parse DOM textContent (which may include span markup).
+    let currentSamplePlain = "";
+
     // Choose and display text for the currently selected difficulty
     function chooseAndDisplayText() {
-        const level = difficultySelect.value || "easy";
+        const levelRaw = (difficultySelect && difficultySelect.value) || "easy";
+        const level = String(levelRaw).toLowerCase();
         const pool = texts[level] || texts.easy;
         const chosen = randomFrom(pool);
-        sampleTextEl.textContent = chosen;
+        // store plain chosen text and render sample as spans for highlighting
+        currentSamplePlain = chosen;
+        renderSampleWithSpans(chosen);
         return chosen;
+    }
+
+    // Render sample text into word <span> elements so we can style them individually
+    function renderSampleWithSpans(text) {
+        if (!sampleTextEl) return;
+        // split on whitespace and render each word as a span
+        const words = text.trim().split(/\s+/);
+        sampleTextEl.innerHTML = words
+            .map(
+                (w, i) =>
+                    `<span class="word" data-word-index="${i}">${w}</span>`
+            )
+            .join(" ");
+    }
+
+    // Compare typed words to sample words and add .correct / .incorrect classes
+    function highlightTypedWords(sample, typed) {
+        if (!sampleTextEl) return;
+        // Accept either an explicit sample string or fallback to the stored plain
+        // sample text. Avoid using sampleTextEl.textContent here because it may
+        // include spacing or markup differences.
+        const sampleStr =
+            sample || currentSamplePlain || sampleTextEl.textContent || "";
+        const sampleWords = normalizeTextToWords(sampleStr);
+        const typedWords = normalizeTextToWords(typed);
+
+        const spans = sampleTextEl.querySelectorAll("span.word");
+        spans.forEach((span, i) => {
+            span.classList.remove("correct", "incorrect");
+            if (i < typedWords.length) {
+                if (typedWords[i] === sampleWords[i]) {
+                    span.classList.add("correct");
+                } else {
+                    span.classList.add("incorrect");
+                }
+            }
+        });
+    }
+
+    // Input handler to provide real-time feedback
+    function handleUserInput() {
+        const typed = userInput ? userInput.value || "" : "";
+        // pass empty sample so highlightTypedWords will use currentSamplePlain
+        highlightTypedWords("", typed);
+    }
+
+    // Attach real-time input listener
+    if (userInput) {
+        userInput.addEventListener("input", handleUserInput);
     }
 
     // When difficulty changes, update the sample text
@@ -127,13 +183,17 @@
         // Calculate correct words and WPM, display in results if elements exist
         const wpmEl = document.getElementById("wpm");
         const levelEl = document.getElementById("level");
-        const sample = sampleTextEl ? sampleTextEl.textContent || "" : "";
+        const sample =
+            currentSamplePlain ||
+            (sampleTextEl ? sampleTextEl.textContent || "" : "");
         const typed = userInput ? userInput.value || "" : "";
         const correctWords = countCorrectWords(sample, typed);
         const wpm = calculateWPM(correctWords, elapsedMs);
         if (wpmEl) wpmEl.textContent = String(wpm);
         if (levelEl && difficultySelect)
-            levelEl.textContent = (difficultySelect.value || "").toLowerCase();
+            levelEl.textContent = String(
+                difficultySelect.value || ""
+            ).toLowerCase();
 
         // reset start timestamp to indicate test ended
         startTimestamp = null;

@@ -69,3 +69,18 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
+/* Word highlighting for real-time typing feedback */
+.word {
+    display: inline-block;
+    padding-right: 0.35rem;
+    transition: color 120ms ease;
+}
+
+.word.correct {
+    color: #007bff; /* blue */
+}
+
+.word.incorrect {
+    color: #d9534f; /* red */
+}
