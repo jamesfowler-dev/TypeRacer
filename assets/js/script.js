@@ -130,9 +130,31 @@
         });
     }
 
-    // Input handler to provide real-time feedback
+    // Start the test when the user begins typing (auto-start) and provide real-time feedback
+    function startTestIfNeeded() {
+        // start only if not already running and there's non-whitespace input
+        if (
+            !startTimestamp &&
+            userInput &&
+            (userInput.value || "").trim().length > 0
+        ) {
+            // record start time but do not choose a new sample (we assume sample already displayed)
+            startTimestamp = performance.now();
+
+            // update buttons
+            startBtn.disabled = true;
+            if (stopBtn) stopBtn.disabled = false;
+            if (retryBtn) retryBtn.disabled = true;
+
+            // clear previous time shown
+            if (timeDisplay) timeDisplay.textContent = "0.00";
+        }
+    }
+
     function handleUserInput() {
         const typed = userInput ? userInput.value || "" : "";
+        // auto-start when first meaningful character is typed
+        startTestIfNeeded();
         // pass empty sample so highlightTypedWords will use currentSamplePlain
         highlightTypedWords("", typed);
     }
@@ -140,6 +162,16 @@
     // Attach real-time input listener
     if (userInput) {
         userInput.addEventListener("input", handleUserInput);
+        // stop the test when the user presses Enter (prevent newline)
+        userInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                // only stop if a test is running
+                if (startTimestamp) {
+                    handleStopClick(e);
+                }
+            }
+        });
     }
 
     // When difficulty changes, update the sample text
@@ -207,16 +239,38 @@
     // Named handler: retry / reset
     function handleRetryClick(e) {
         e && e.preventDefault();
-        startTimestamp = null;
+        // Load a new sample at the same difficulty
+        chooseAndDisplayText();
+
+        // clear and enable the input so user can start typing immediately
+        if (userInput) {
+            userInput.value = "";
+            userInput.disabled = false;
+            userInput.focus();
+        }
+
+        // reset displayed results
         if (timeDisplay) timeDisplay.textContent = "0.00";
-        userInput.value = "";
+        const wpmEl = document.getElementById("wpm");
+        if (wpmEl) wpmEl.textContent = "0";
+        const levelEl = document.getElementById("level");
+        if (levelEl && difficultySelect)
+            levelEl.textContent = String(
+                difficultySelect.value || ""
+            ).toLowerCase();
+
+        startTimestamp = null;
+
+        // set button state: start enabled, stop disabled, retry disabled until test runs
         startBtn.disabled = false;
         if (stopBtn) stopBtn.disabled = true;
+        if (retryBtn) retryBtn.disabled = true;
     }
 
     // initialize button states
     if (stopBtn) stopBtn.disabled = true;
-    if (retryBtn) retryBtn.disabled = false;
+    // retry should be disabled until a test has completed
+    if (retryBtn) retryBtn.disabled = true;
 
     // attach listeners
     startBtn.addEventListener("click", handleStartClick);
